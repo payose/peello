@@ -1,6 +1,18 @@
 <template>
     <div class="d-flex fill-height align-center">
         <v-container class="fill-height">
+            
+            <v-snackbar
+            :timeout="5000"
+            :value="show"
+            absolute
+            centered
+            right
+            tile
+            color="red accent-2"
+            >
+                email or password incorrect
+            </v-snackbar>
             <v-row no-gutters>
             <v-col
                 cols="12"
@@ -53,14 +65,13 @@
                             >
                                 Signin
                             </v-btn>
-                            <v-btn @click="clear">
-                                clear
-                            </v-btn>
+                            
                         </form>
                     </validation-observer>
                 </v-card>
             </v-col>
             </v-row>
+
         </v-container>
     </div>
 </template>
@@ -68,24 +79,27 @@
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
   export default {
+    layout: 'auth',
     components: {
       ValidationProvider,
       ValidationObserver,
     },
-    data: () => ({
-      email: '',
-      password: '',
+    data(){
+        return{
+            email: '',
+            password: '',
+            show: false
    
-    }),
+        }
+    },
 
     methods: {
         signin () {
             this.$refs.observer.validate()
             this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
             .then((user) => $nuxt.$router.push('/'))
-            .catch(function (error) {
-                alert('wrong credentials')
-            })
+            .catch (this.show = true)
+            
         },
 
       clear () {

@@ -106,9 +106,10 @@
             </v-row>
         </v-container>
     </div>
-  </template>
+</template>
 
 <script>
+
 import { ValidationObserver, ValidationProvider } from "vee-validate";
   export default {
     components: {

@@ -16,6 +16,7 @@
     "@nuxtjs/firebase": "^8.2.2",
     "core-js": "^3.19.3",
     "firebase": "^9.6.10",
+    "moment": "^2.29.2",
     "nuxt": "^2.15.8",
     "vee-validate": "^3.4.14",
     "vue": "^2.6.14",
